@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="entity.Post" table="post">
+		<id name="id" type="int" column="id">
+			<generator class="increment" />
+		</id>
+
+		<property name="title" column="title" type="string" />
+		
+		<set name="comments" table="comment" inverse="true" cascade="save-update" lazy="true" fetch="select">
+            <key>
+                <column name="id" not-null="true" />
+            </key>
+            <one-to-many class="entity.Comment" />
+        </set>
+	</class>
+</hibernate-mapping>
